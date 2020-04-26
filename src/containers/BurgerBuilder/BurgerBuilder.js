@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { MEAT, CHEESE, BACON, SALAD } from '../../components/Burger/burgerIngredientTypes'
 import { Aux } from '../../hoc/Aux'
 import { Burger } from '../../components/Burger/Burger'
+import { BuildControls } from '../../components/Burger/BuildControls/BuildControls'
 
 export class BurgerBuilder extends Component {
 
@@ -19,9 +20,7 @@ export class BurgerBuilder extends Component {
         return(
             <Aux>
                 <Burger ingredients={this.state.ingredients} />
-                <div>
-                    Burger Controll!
-                </div>
+                <BuildControls />
             </Aux>
         )
     }
