@@ -1,0 +1,6 @@
+export const BREAD_BOTTOM = 'bread_bottom'
+export const BREAD_TOP = 'bread_top'
+export const MEAT = 'meat'
+export const CHEESE = 'cheese'
+export const BACON = 'bacon'
+export const SALAD = 'salad'
