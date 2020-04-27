@@ -4,7 +4,7 @@ import { BuildControl } from './BuildControl/BuildControl'
 import { controls } from './buildControlsConsts'
 import classes from './BuildControls.module.css'
 
-export const BuildControls = ({onAdd, onRemove, disabled, price}) => {
+export const BuildControls = ({onAdd, onRemove, disabled, price, purchasable}) => {
     return (
         <div className={classes.BuildControls}>
             <p> Burder price: <strong>{price.toFixed(2)} </strong>$ </p>
@@ -19,7 +19,7 @@ export const BuildControls = ({onAdd, onRemove, disabled, price}) => {
                     />
                 ))
             }
-            <button className={classes.OrderButton}>ORDER NOW</button>
+            <button disabled={!purchasable} className={classes.OrderButton}>ORDER NOW</button>
         </div>
     )
 }
