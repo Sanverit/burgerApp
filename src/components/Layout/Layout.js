@@ -12,7 +12,6 @@ export class Layout extends Component {
     }
 
     openSideMunu = () => {
-        console.log('open')
         this.setState({sideMenuOpened: true})
     }
 
@@ -23,7 +22,7 @@ export class Layout extends Component {
     render(){
         return (
             <Aux>
-                <Toolbar onClickMenu={() => this.openSideMunu() }/>
+                <Toolbar drawerToggleClicked={() => this.openSideMunu() }/>
                 <SideDrawer onClickBackDrop={() => this.closeSideMunu()} isMenuOpened={this.state.sideMenuOpened} />
                 <main className={classes.Content}>
                     {this.props.children}
