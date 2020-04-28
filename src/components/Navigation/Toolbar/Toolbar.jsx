@@ -4,10 +4,10 @@ import { Logo } from '../../Logo/Logo'
 import { NavigationItems } from '../NavigationItems/NavigationItems'
 import classes from './Toolbar.module.css'
 
-export const Toolbar = () => {
+export const Toolbar = ({onClickMenu}) => {
     return (
         <header className={classes.Toolbar}>
-            <div>Menu</div>
+            <div onClick={onClickMenu}> Menu </div>
             <div className={classes.Logo}>
                 <Logo />
             </div>
