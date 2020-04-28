@@ -11,7 +11,7 @@ export const Toolbar = () => {
             <div className={classes.Logo}>
                 <Logo />
             </div>
-            <nav>
+            <nav className={classes.DisplayOnly}>
                 <NavigationItems />
             </nav>
         </header>
