@@ -8,13 +8,73 @@ import classes from './ContactData.module.css'
 
 export class ContactData extends Component {
     state = {
-        name: '',
-        email: '',
-        address: {
-            street: '',
-            building: '',
-            zipCode: '',
-            city: ''
+        orderForm: {
+            name: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'your name'
+                },
+                value: ''
+            },
+            street: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'your street'
+                },
+                value: ''
+            },
+            building: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'your building'
+                },
+                value: ''
+            },
+            zipCode: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'your zipcode'
+                },
+                value: ''
+            },
+            city: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'your city'
+                },
+                value: ''
+            },
+            country: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'your country'
+                },
+                value: ''
+            },
+            email: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'your email'
+                },
+                value: ''
+            },
+            deliveryMethod: {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {value: 'fastest', displayValue: 'Fastest'},
+                        {value: 'cheapest', displayValue: 'Cheapest'},
+                    ]
+                },
+                value: ''
+            },
         },
         loading: false
     }
@@ -55,14 +115,24 @@ export class ContactData extends Component {
     }
 
     render() {
+        const formElementsArray = []
+        for(let formElement in this.state.orderForm){
+            formElementsArray.push({
+                id: formElement,
+                config: this.state.orderForm[formElement]
+            })
+        }
+        const inputElements = formElementsArray.map(formEl => (
+            <Input 
+                key={formEl.id} 
+                elementType={formEl.config.elementType} 
+                elementConfig={formEl.config.elementConfig} 
+                value={formEl.config.value} 
+            />
+        ))
         let form = (
             <form>
-                <Input inputtype='input' type='text' name='name' placeholder='your name' />
-                <Input inputtype='input' type='email' name='email' placeholder='your email' />
-                <Input inputtype='input' type='text' name='street' placeholder='your street' />
-                <Input inputtype='input' type='text' name='building' placeholder='your building' />
-                <Input inputtype='input' type='text' name='zipCode' placeholder='your zipCode' />
-                <Input inputtype='input' type='text' name='city' placeholder='your city' />
+                {inputElements}
                 <Button btnType="Success" clicked={this.sendOrderHandler} >ORDER</Button>
             </form>
         )
