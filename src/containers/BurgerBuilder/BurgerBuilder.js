@@ -29,6 +29,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount() {
+        console.log('this.props', this.props)
         axiosOrderInstance.get("/ingredients.json")
             .then(response => {
                 console.log('response get ingredients: ', response)
@@ -49,33 +50,35 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.setState({loading: true})
-        const {ingredients, totalPrice} = this.state
-        const order = {
-            ingredients,
-            totalPrice,
-            customer: {
-                name: 'Alex',
-                address: {
-                    street: 'vicolo Anselmi',
-                    building: '3',
-                    zipCode: '27029',
-                    city: 'Vigevano'
-                },
-                email: "ndt@gmail.com"
-            },
-            deliveryMethod: 'fastest'
-        }
+       
+        // this.setState({loading: true})
+        // const {ingredients, totalPrice} = this.state
+        // const order = {
+        //     ingredients,
+        //     totalPrice,
+        //     customer: {
+        //         name: 'Alex',
+        //         address: {
+        //             street: 'vicolo Anselmi',
+        //             building: '3',
+        //             zipCode: '27029',
+        //             city: 'Vigevano'
+        //         },
+        //         email: "ndt@gmail.com"
+        //     },
+        //     deliveryMethod: 'fastest'
+        // }
 
-        axiosOrderInstance.post("/order.json", order)
-            .then(response => {
-                console.log('response send order: ', response)
-                this.setState({loading: false, purchasing: false})
-            })
-            .catch(error => {
-                console.log('error send order: ', error)
-                this.setState({loading: false, purchasing: false})
-            })
+        // axiosOrderInstance.post("/order.json", order)
+        //     .then(response => {
+        //         console.log('response send order: ', response)
+        //         this.setState({loading: false, purchasing: false})
+        //     })
+        //     .catch(error => {
+        //         console.log('error send order: ', error)
+        //         this.setState({loading: false, purchasing: false})
+        //     })
+        this.props.history.push('/checkout')
     }
 
     updatePurchaseState = (ingredients) => {
@@ -171,7 +174,6 @@ class BurgerBuilder extends Component {
                    { orderSummary }
                 </Modal>
                 { burgerContainer }
-                
             </Aux>
         )
     }
