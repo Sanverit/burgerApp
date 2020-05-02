@@ -5,7 +5,7 @@ import classes from './Navigation.module.css'
 export const NavigationItem = ({children, link, active}) => {
     return (
         <li className={classes.NavigationItem}>
-            <a href="link"
+            <a href={link}
                 className={ active ? classes.active : null}
             >
                 {children}
