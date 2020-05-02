@@ -6,7 +6,7 @@ export const Button = ({children, clicked, btnType}) => {
     return (
         <button 
             className={[classes.Button, classes[btnType]].join(' ')} 
-            onClick={(e) => clicked(e)}
+            onClick={clicked}
         >
             {children}
         </button>

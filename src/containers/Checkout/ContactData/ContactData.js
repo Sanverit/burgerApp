@@ -85,21 +85,17 @@ export class ContactData extends Component {
         const {ingredients, totalPrice} = this.props
         
         this.setState({loading: true})
+
+        const formData ={}
+
+        for(let formEl in this.state.orderForm){
+            formData[formEl] = this.state.orderForm[formEl].value
+        }
        
         const order = {
             ingredients,
             totalPrice,
-            customer: {
-                name: 'Alex',
-                address: {
-                    street: 'vicolo Anselmi',
-                    building: '3',
-                    zipCode: '27029',
-                    city: 'Vigevano'
-                },
-                email: "ndt@gmail.com"
-            },
-            deliveryMethod: 'fastest'
+            orderData: formData
         }
 
         axiosOrderInstance.post("/orders.json", order)
@@ -112,6 +108,20 @@ export class ContactData extends Component {
                 console.log('error send order: ', error)
                 this.setState({loading: false})
             })
+    }
+
+    inputChangedHandler = (event, element) => {
+        console.log('changed', event.target.value, element)
+        this.setState({
+            ...this.state,
+            orderForm: {
+                ...this.state.orderForm,
+                [element]: {
+                    ...this.state.orderForm[element],
+                    value: event.target.value
+                } 
+            }
+        })
     }
 
     render() {
@@ -127,13 +137,14 @@ export class ContactData extends Component {
                 key={formEl.id} 
                 elementType={formEl.config.elementType} 
                 elementConfig={formEl.config.elementConfig} 
-                value={formEl.config.value} 
+                value={formEl.config.value}
+                changed={(event) => this.inputChangedHandler(event, formEl.id)}
             />
         ))
         let form = (
-            <form>
+            <form onSubmit={this.sendOrderHandler}>
                 {inputElements}
-                <Button btnType="Success" clicked={this.sendOrderHandler} >ORDER</Button>
+                <Button btnType="Success" >ORDER</Button>
             </form>
         )
         if(this.state.loading){
