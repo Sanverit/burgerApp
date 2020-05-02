@@ -3,12 +3,22 @@ import classes from './Input.module.css';
 
 export const Input = (props) => {
     let inputEl = null
+
+    const inputClasses = [classes.InputEl]
+    if(props.invalid && props.shouldValidate && props.touched){
+        inputClasses.push(classes.Invalid)
+    }
+
+    let validationError = null;
+    if (props.invalid && props.touched) {
+        validationError = <p className={classes.ValidationError}>Please enter valid {props.elementConfig.placeholder}</p>;
+    }
     switch (props.elementType) {
         case 'input':
             inputEl = (
                 <input 
                     {...props.elementConfig} 
-                    className={classes.InputEl} 
+                    className={inputClasses.join(' ')} 
                     value={props.value} 
                     onChange={props.changed}
                 />
@@ -18,7 +28,7 @@ export const Input = (props) => {
             inputEl = (
                 <textarea
                     {...props.elementConfig}
-                    className={classes.InputEl} 
+                    className={inputClasses.join(' ')} 
                     value={props.value} 
                     onChange={props.changed}
                 />
@@ -27,7 +37,7 @@ export const Input = (props) => {
         case 'select':
             inputEl = (
                 <select 
-                    className={classes.InputEl} 
+                    className={inputClasses.join(' ')} 
                     value={props.value} 
                     onChange={props.changed}
                 >
@@ -46,7 +56,7 @@ export const Input = (props) => {
             inputEl = (
                 <input
                     {...props.elementConfig} 
-                    className={classes.InputEl} 
+                    className={inputClasses.join(' ')} 
                     value={props.value} 
                     onChange={props.changed}
                 />
@@ -57,6 +67,7 @@ export const Input = (props) => {
         <div className={classes.Input}>
             <label className={classes.Label}>{props.label}</label>
             { inputEl }
+            {validationError}
         </div>
     )
 }
