@@ -22,8 +22,8 @@ export class Layout extends Component {
     render(){
         return (
             <Aux>
-                <Toolbar drawerToggleClicked={() => this.openSideMunu() }/>
-                <SideDrawer onClickBackDrop={() => this.closeSideMunu()} isMenuOpened={this.state.sideMenuOpened} />
+                <Toolbar drawerToggleClicked={this.openSideMunu}/>
+                <SideDrawer onClickBackDrop={this.closeSideMunu} isMenuOpened={this.state.sideMenuOpened} />
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>
