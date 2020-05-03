@@ -74,44 +74,6 @@ class BurgerBuilder extends Component {
         this.setState({ purchasable: sum > 0 })
     }
 
-    addIngredientHandler = (type) => {
-        const oldCount = this.state.ingredients[type]
-        const updatedCount = oldCount + 1
-        const updatedIngredients = {
-            ...this.state.ingredients
-        }
-        updatedIngredients[type] = updatedCount
-        const priceAddition = ENGREDIENT_PRICES[type]
-        const oldPrice = this.state.totalPrice
-        const newPrice = oldPrice + priceAddition
-
-        this.setState({
-            ingredients: updatedIngredients,
-            totalPrice: newPrice
-        })
-
-        this.updatePurchaseState(updatedIngredients)
-    }
-
-    removeIngredientHandler = (type) => {
-        const oldCount = this.state.ingredients[type]
-        const updatedCount = oldCount < 1 ? 0 : oldCount - 1
-        const updatedIngredients = {
-            ...this.state.ingredients
-        }
-        updatedIngredients[type] = updatedCount
-        const priceDeduction = ENGREDIENT_PRICES[type]
-        const oldPrice = this.state.totalPrice
-        const newPrice = oldPrice > 0 ? oldPrice - priceDeduction : 0
-
-        this.setState({
-            ingredients: updatedIngredients,
-            totalPrice: newPrice
-        })
-
-        this.updatePurchaseState(updatedIngredients)
-    }
-
     render(){
         let disabledInfo = {
             ...this.props.ingredients
@@ -132,7 +94,7 @@ class BurgerBuilder extends Component {
                         onAdd={this.props.onIngredientAdded}
                         onRemove={this.props.onIngredientRemoved}
                         disabled={disabledInfo}
-                        price={this.state.totalPrice}
+                        price={this.props.totalPrice}
                         purchasable={this.state.purchasable}
                         orderNow={() => this.purchaseHandler()}
                     />
@@ -143,7 +105,7 @@ class BurgerBuilder extends Component {
                 ingredients={this.props.ingredients}
                 clickedCancel={this.purchaseCancelHandler}
                 clickedNext={this.purchaseContinueHandler}
-                totalPrice={this.state.totalPrice}
+                totalPrice={this.props.totalPrice}
             />
         }
 
@@ -164,14 +126,15 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
     return {
-        ingredients: state.ingredients
+        ingredients: state.ingredients,
+        totalPrice: state.totalPrice
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: (ingName) => dispatch({type: actionTypes.ADD_ENGREDIENT, ingredientName: ingName}),
-        onIngredientRemoved: (ingName) => dispatch({type: actionTypes.REMOVE_ENGREDIENT, ingredientName: ingName})
+        onIngredientRemoved: (ingName) => dispatch({type: actionTypes.REMOVE_ENGREDIENT, ingredientName: ingName}),
     }
 }
 
