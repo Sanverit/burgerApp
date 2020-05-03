@@ -34,3 +34,9 @@ export const purchaseBurger = (orderData) => {
             })
     }
 }
+
+export const purchaseInitAC = (error) => {
+    return {
+        type: actionTypes.PURCHASE_INIT
+    }
+}
