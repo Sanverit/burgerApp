@@ -30,15 +30,15 @@ class BurgerBuilder extends Component {
 
     componentDidMount() {
         console.log('this.props', this.props)
-        axiosOrderInstance.get("/ingredients.json")
-            .then(response => {
-                console.log('response get ingredients: ', response)
-                this.setState({ingredients: response.data})
-            })
-            .catch(error => {
-                console.log('error get ingredients: ', error)
-                this.setState({errorGettingIngr: true})
-            })
+        // axiosOrderInstance.get("/ingredients.json")
+        //     .then(response => {
+        //         console.log('response get ingredients: ', response)
+        //         this.setState({ingredients: response.data})
+        //     })
+        //     .catch(error => {
+        //         console.log('error get ingredients: ', error)
+        //         this.setState({errorGettingIngr: true})
+        //     })
     }
 
     purchaseHandler = () => {
