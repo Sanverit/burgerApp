@@ -19,7 +19,7 @@ export const setIngredientAC = (ings) => {
     }
 }
 
-export const fetchIngredientsFailed = () => {
+export const fetchIngredientsFailedAC = () => {
     return {
         type: actionTypes.FETCH_INGREDIENTS_FAILED
     }
@@ -32,7 +32,7 @@ export const initIngredients = () => {
             dispatch(setIngredientAC(response.data))
         })
         .catch(error => {
-            dispatch(fetchIngredientsFailed())
+            dispatch(fetchIngredientsFailedAC())
         })
     }
 }
