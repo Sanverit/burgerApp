@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { MEAT, CHEESE, BACON, SALAD } from '../../components/Burger/burgerIngredientTypes'
 import { Aux } from '../../hoc/Aux/Aux'
 import { Burger } from '../../components/Burger/Burger'
 import { BuildControls } from '../../components/Burger/BuildControls/BuildControls'
@@ -12,19 +11,9 @@ import { withErrorHandler } from '../../hoc/withErrorHandler/withErrorHandler'
 import { axiosOrderInstance } from '../../axios-order'
 import * as actionTypes from '../../store/actions'
 
-const ENGREDIENT_PRICES = {
-    [SALAD]: 0.6,
-    [BACON]: 1,
-    [CHEESE]: 0.7,
-    [MEAT]: 1.5,
-}
-
 class BurgerBuilder extends Component {
 
-    state = {
-        ingredients: null,
-        totalPrice: 4,
-        purchasable: false,
+    state = {        
         purchasing: false,
         loading: false,
         errorGettingIngr: false
@@ -71,7 +60,7 @@ class BurgerBuilder extends Component {
             })
             .reduce((sum, el) => { return sum + el }, 0)
 
-        this.setState({ purchasable: sum > 0 })
+        return sum > 0
     }
 
     render(){
@@ -95,7 +84,7 @@ class BurgerBuilder extends Component {
                         onRemove={this.props.onIngredientRemoved}
                         disabled={disabledInfo}
                         price={this.props.totalPrice}
-                        purchasable={this.state.purchasable}
+                        purchasable={this.updatePurchaseState(this.props.ingredients)}
                         orderNow={() => this.purchaseHandler()}
                     />
                 </Aux>
