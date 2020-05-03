@@ -19,10 +19,16 @@ const reducer = (state = initialState, action) => {
             }
 
         case actionTypes.PURCHASE_BURGER_FAIL:
-                return {
-                    ...state,
-                    loading: false,
-                }
+            return {
+                ...state,
+                loading: false,
+            }
+
+        case actionTypes.PURCHASE_BURGER_START:
+            return {
+                ...state,
+                loading: true,
+            }
     
         default:
            return state

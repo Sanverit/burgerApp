@@ -1,2 +1,2 @@
 export { addIngredientAC, removeIngredientAC, initIngredients } from './burgerBuilderAC'
-export { purchaseBurgerStart } from './orderAC'
+export { purchaseBurger } from './orderAC'
