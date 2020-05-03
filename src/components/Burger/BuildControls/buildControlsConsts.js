@@ -1,8 +1,8 @@
-import { MEAT, CHEESE, BACON, SALAD } from '../burgerIngredientTypes'
+import * as ingTypes from '../burgerIngredientTypes'
 
 export const controls = [
-    { label: 'Salad', type: [SALAD] },
-    { label: 'Cheese', type: [CHEESE] },
-    { label: 'Bacon', type: [BACON] },
-    { label: 'Meat', type: [MEAT] },
+    { label: 'Salad', type: [ingTypes.SALAD] },
+    { label: 'Cheese', type: [ingTypes.CHEESE] },
+    { label: 'Bacon', type: [ingTypes.BACON] },
+    { label: 'Meat', type: [ingTypes.MEAT] },
 ]
