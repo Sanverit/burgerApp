@@ -8,6 +8,7 @@ export const NavigationItems = () => {
         <ul className={classes.NavigationItems}>
             <NavigationItem link='/' exact > Burger builder </NavigationItem>
             <NavigationItem link='/orders' > My orders </NavigationItem>
+            <NavigationItem link='/auth' > Auth </NavigationItem>
         </ul>
     )
 }
