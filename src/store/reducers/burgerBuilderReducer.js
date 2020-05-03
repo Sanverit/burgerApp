@@ -1,5 +1,5 @@
-import * as actionTypes from './actions'
-import * as ingTypes from '../components/Burger/burgerIngredientTypes'
+import * as actionTypes from '../actions/actionTypes'
+import * as ingTypes from '../../components/Burger/burgerIngredientTypes'
 
 const ENGREDIENT_PRICES = {
     [ingTypes.SALAD]: 0.6,
