@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import { Input } from '../../components/UI/Input/Input'
 import { Button } from '../../components/UI/Button/Button'
@@ -131,8 +132,15 @@ class Auth extends Component {
             errorMessage = <p>{this.props.error.message}</p>
         }
 
+        let redirect = null
+
+        if(this.props.isAuth){
+            redirect = <Redirect to="/" />
+        }
+
         return (
             <div className={classes.Auth}>
+                {redirect}
                 {errorMessage}
                 <form onSubmit={this.submitAuthHandler}>
                     {form}
@@ -148,6 +156,7 @@ const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
         error: state.auth.error,
+        isAuth: state.auth.token !== null
     }
 }
 
