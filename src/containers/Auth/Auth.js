@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import { Input } from '../../components/UI/Input/Input'
 import { Button } from '../../components/UI/Button/Button'
+import { Spinner } from '../../components/UI/Spinner/Spinner'
+import { withErrorHandler } from '../../hoc/withErrorHandler/withErrorHandler'
+import { axiosOrderInstance } from '../../axios-order'
 import classes from './Auth.module.css'
+import * as actions from '../../store/actions/index'
 
-export default class Auth extends Component {
+class Auth extends Component {
     state = {
         controls: {
             email: {
@@ -84,6 +89,11 @@ export default class Auth extends Component {
         this.setState({controls: updatedControls, formIsValid});
     }
 
+    submitAuthHandler = (event) => {
+        event.preventDefault();
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value,)
+    }
+
     render() {
         const formElementsArray = []
         for(let formElement in this.state.controls){
@@ -106,7 +116,7 @@ export default class Auth extends Component {
         ))
         return (
             <div className={classes.Auth}>
-                <form>
+                <form onSubmit={this.submitAuthHandler}>
                     {form}
                     <Button btnType="Success">Submit</Button>
                 </form>
@@ -114,3 +124,17 @@ export default class Auth extends Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password) => dispatch(actions.auth(email, password)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Auth, axiosOrderInstance))
