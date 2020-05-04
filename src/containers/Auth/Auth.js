@@ -41,7 +41,8 @@ class Auth extends Component {
                 touched: false
             },
         },
-        formIsValid: false
+        formIsValid: false,
+        isSingup: true
     }
 
     checkValidity(value, rules) {
@@ -91,7 +92,13 @@ class Auth extends Component {
 
     submitAuthHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value,)
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSingup)
+    }
+
+    switchAuthModeHandler = () => {
+        this.setState(prevState => {
+            return {isSingup: !prevState.isSingup}
+        })
     }
 
     render() {
@@ -118,8 +125,9 @@ class Auth extends Component {
             <div className={classes.Auth}>
                 <form onSubmit={this.submitAuthHandler}>
                     {form}
-                    <Button btnType="Success">Submit</Button>
+                    <Button btnType="Success">SUBMIT</Button>
                 </form>
+                <Button clicked={this.switchAuthModeHandler} btnType="Danger">SWITCH TO { this.state.isSingup ? 'SINGIN' : 'SINGUP' }</Button>
             </div>
         )
     }
@@ -133,7 +141,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password) => dispatch(actions.auth(email, password)),
+        onAuth: (email, password, isSingup) => dispatch(actions.auth(email, password, isSingup)),
     }
 }
 
