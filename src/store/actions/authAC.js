@@ -10,10 +10,11 @@ export const authStartAC = () => {
     }
 }
 
-export const authSuccessAC = (authData) => {
+export const authSuccessAC = ({idToken, localId}) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        authData
+        idToken,
+        userId: localId
     }
 }
 
@@ -40,7 +41,7 @@ export const auth = (email, password, isSingup) => {
             })
             .catch(error => {
                 console.log('authFailAC', error)
-                dispatch(authFailAC(error))
+                dispatch(authFailAC(error.response.data.error))
             })
     }
 }
