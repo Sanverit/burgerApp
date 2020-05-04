@@ -6,7 +6,7 @@ import { Backdrop } from '../../UI/Backdrop/Backdrop'
 import { Aux } from '../../../hoc/Aux/Aux'
 import classes from './SideDrawer.module.css'
 
-export const SideDrawer = ({isMenuOpened, onClickBackDrop}) => {
+export const SideDrawer = ({isMenuOpened, onClickBackDrop, isAuth}) => {
     return (
         <Aux>
             <Backdrop show={isMenuOpened} onClose={onClickBackDrop} />
@@ -15,7 +15,7 @@ export const SideDrawer = ({isMenuOpened, onClickBackDrop}) => {
                     <Logo />
                 </div>
                 <nav>
-                    <NavigationItems />
+                    <NavigationItems isAuth={isAuth}/>
                 </nav>
             </div>
         </Aux>

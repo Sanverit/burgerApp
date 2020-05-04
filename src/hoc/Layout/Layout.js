@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import { Aux } from '../Aux/Aux'
 import { Toolbar } from '../../components/Navigation/Toolbar/Toolbar'
 import { SideDrawer } from '../../components/Navigation/SideDrawer/SideDrawer'
 import classes from './Layout.module.css'
 
-export class Layout extends Component {
+class Layout extends Component {
 
     state = {
         sideMenuOpened: false
@@ -22,8 +23,8 @@ export class Layout extends Component {
     render(){
         return (
             <Aux>
-                <Toolbar drawerToggleClicked={this.openSideMunu}/>
-                <SideDrawer onClickBackDrop={this.closeSideMunu} isMenuOpened={this.state.sideMenuOpened} />
+                <Toolbar drawerToggleClicked={this.openSideMunu} isAuth={this.props.isAuthenticated}/>
+                <SideDrawer onClickBackDrop={this.closeSideMunu} isMenuOpened={this.state.sideMenuOpened} isAuth={this.props.isAuthenticated}/>
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>
@@ -31,3 +32,17 @@ export class Layout extends Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.token !== null
+    }
+}
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         onFetchOrders: (token) => dispatch(actions.fetchOrders(token)),
+//     }
+// }
+
+export default connect(mapStateToProps)(Layout)
