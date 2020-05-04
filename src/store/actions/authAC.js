@@ -25,6 +25,20 @@ export const authFailAC = (error) => {
     }
 }
 
+export const logoutAC = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
+
+export const checkAuthTimeout = (expirationTime) => {
+    return dispatch => {
+       setTimeout(() => {
+            dispatch(logoutAC())
+       }, expirationTime * 1000)
+    }
+}
+
 export const auth = (email, password, isSingup) => {
     return dispatch => {
         dispatch(authStartAC())
@@ -38,6 +52,7 @@ export const auth = (email, password, isSingup) => {
             .then(response => {
                 console.log('authSuccessAC', response)
                 dispatch(authSuccessAC(response.data))
+                dispatch(checkAuthTimeout(response.data.expiresIn))
             })
             .catch(error => {
                 console.log('authFailAC', error)
